@@ -5,24 +5,30 @@
 #ifndef DATA_STRUCTURES_STACK_H
 #define DATA_STRUCTURES_STACK_H
 
-typedef struct stack stack;
+typedef struct Stack Stack;
 
-struct stack {
+struct Stack {
     int capacity;
     int top;
     int *array;
 };
 
-stack *create();
+Stack *create();
 
-void push(stack *stack, int value);
+void push(Stack *stack, int value);
 
-int pop(stack *stack);
+int pop(Stack *stack);
 
-int top(stack *stack);
+int top(Stack *stack);
 
-int isEmpty(stack *stack);
+int isEmpty(Stack *stack);
 
-int getSize(stack *stack);
+int getSize(Stack *stack);
+
+void resize(Stack **stack);
+
+void print(Stack *stack);
+
+void freeStack(Stack *stack);
 
 #endif //DATA_STRUCTURES_STACK_H
