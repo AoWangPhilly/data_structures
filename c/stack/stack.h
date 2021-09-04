@@ -5,13 +5,11 @@
 #ifndef DATA_STRUCTURES_STACK_H
 #define DATA_STRUCTURES_STACK_H
 
-typedef struct Stack Stack;
-
-struct Stack {
+typedef struct {
     int capacity;
     int top;
     int *array;
-};
+} Stack;
 
 Stack *create();
 
@@ -25,7 +23,7 @@ int isEmpty(Stack *stack);
 
 int getSize(Stack *stack);
 
-void resize(Stack **stack);
+void resize(Stack *stack);
 
 void print(Stack *stack);
 
