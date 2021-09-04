@@ -7,7 +7,7 @@
 #include "stack.h"
 
 enum {
-    CAPACITY = 64
+    CAPACITY = 16
 };
 
 Stack *
@@ -24,7 +24,7 @@ create() {
 void
 push(Stack *stack, int value) {
     if (getSize(stack) >= stack->capacity) {
-        resize(&stack);
+        resize(stack);
         printf("Increased capacity to %d elements\n", stack->capacity);
     }
     stack->array[++stack->top] = value;
@@ -59,8 +59,18 @@ getSize(Stack *stack) {
 }
 
 void
-resize(Stack **stack) {
-    (*stack)->array = realloc((*stack)->array, (*stack)->capacity *= 2);
+resize(Stack *stack) {
+    int *tmp;
+
+    tmp = realloc(stack->array, (stack->capacity *= 2) * sizeof(int));
+
+    if (tmp) {
+        stack->array = tmp;
+    } else {
+        freeStack(stack);
+        perror("remalloc failed");
+        exit(1);
+    }
 }
 
 void
