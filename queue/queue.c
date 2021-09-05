@@ -41,6 +41,8 @@ dequeue(Queue *queue)
     if (queue->head < queue->tail) {
         return queue->array[queue->head++];
     }
+
+    
 }
 
 int
