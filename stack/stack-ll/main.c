@@ -4,18 +4,24 @@
 int
 main()
 {
-    Stack *s;
+    Stack *stack;
     int i;
 
-    s = create();
-    for (i = 0; i < 4; ++i) {
-        push(s, i);
+    stack = create();
+    for (i = 0; i < 10; ++i) {
+        push(stack, i);
     }
 
-    pop(s);
-    pop(s);
-    pop(s);
-    pop(s);
-    print(s); 
-    freeStack(s);
+    printf("size: %d\n", getSize(stack));
+    printf("top: %d\n", top(stack));
+    print(stack);
+
+    pop(stack);
+    pop(stack);
+    
+    printf("size: %d\n", getSize(stack));
+    printf("top: %d\n", top(stack));
+    print(stack);
+
+    freeStack(stack);
 }

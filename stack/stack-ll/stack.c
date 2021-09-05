@@ -79,7 +79,6 @@ print(Stack *stack)
     tmp = stack->top;
     
     printf("<");
-    
     if (tmp) {
         for (;tmp->next; tmp = tmp->next) {
             printf("%d, ", tmp->value);
