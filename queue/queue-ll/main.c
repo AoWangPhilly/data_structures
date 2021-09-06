@@ -9,10 +9,12 @@ main()
 
     q = create();
 
-    for (i = 0; i < 3; ++i) {
+    for (i = 0; i < 5; ++i) {
         enqueue(q, i);
     }
-
+    printf("size: %d\n", getSize(q));
+    printf("empty?: %s\n", isEmpty(q) ? "yes" : "no");
+    printf("front: %d\n", front(q));
     print(q);
     freeQueue(q);
 
