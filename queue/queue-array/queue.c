@@ -16,6 +16,7 @@ create()
 
     queue->tail = queue->head = -1;
     queue->capacity = CAPACITY;
+    queue->size = 0;
     queue->array = malloc(sizeof(int) * queue->capacity);
 
     return queue;
@@ -24,31 +25,31 @@ create()
 void
 enqueue(Queue *queue, int value)
 {
-    if (queue->head < 0) {
+    int tail;
+    if (queue->head == -1) {
         queue->array[++queue->head] = value;
         ++queue->tail;
-    } else if (queue->head != 0 && queue->tail == queue->capacity - 1) {
-        queue->tail = 0;
-        queue->array[queue->tail] = value;
     } else {
-        queue->array[++queue->tail] = value;
+        tail = (queue->tail + 1) % queue->capacity
+        if (tail != queue->head) {
+            queue->array[tail] = value;
+        } else {
+            
+        }
+        
     }
 }
 
 int
 dequeue(Queue *queue)
 {
-    if (queue->head < queue->tail) {
-        return queue->array[queue->head++];
-    }
 
-    
 }
 
 int
 isEmpty(Queue *queue)
 {
-    return queue->head > queue->tail;
+    return queue->size == 0;
 }
 
 

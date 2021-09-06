@@ -7,7 +7,7 @@
 
 typedef struct {
     int tail, head;
-    int capacity;
+    int capacity, size;
     int *array;
 } Queue;
 
@@ -18,8 +18,14 @@ void enqueue(Queue *queue, int value);
 
 int dequeue(Queue *queue);
 
+int getSize(Queue *queue);
+
 int isEmpty(Queue *queue);
 
+int front(Queue *queue);
+
 void print(Queue *queue);
+
+void freeQueue(Queue *queue);
 
 #endif //DATA_STRUCTURES_QUEUE_H
