@@ -74,6 +74,33 @@ void
 print(Queue * queue)
 {
     Node *tmp;
+    
+    tmp = queue->head;
 
+    printf("<");
+    if (tmp) {
+        while (tmp->next) {
+            printf("%d, ", tmp->value);
+            tmp = tmp->next;
+        }
 
+        printf("%d", tmp->value);
+    }
+    printf(">\n");
+}
+
+void
+freeQueue(Queue *queue)
+{
+    Node *tmp;
+    
+    tmp = queue->head;
+    while (tmp) {
+        queue->head = queue->head->next;
+        free(tmp);
+        tmp = NULL;
+
+        tmp = queue->head;
+    }
+    free(queue);
 }

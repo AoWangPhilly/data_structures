@@ -9,13 +9,11 @@ main()
 
     q = create();
 
-    for (i = 0; i < 10; ++i) {
+    for (i = 0; i < 3; ++i) {
         enqueue(q, i);
     }
 
-    for(i = 0; i < 10; ++i) {
-        printf("%d, ", dequeue(q));
-    }
-    printf("\n");
+    print(q);
+    freeQueue(q);
 
 }
