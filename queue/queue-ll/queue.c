@@ -7,7 +7,7 @@ create()
 {
     Queue *queue;
 
-    queue = malloc(sizeof(queue));
+    queue = malloc(sizeof(Queue));
     queue->head = queue->tail = NULL;
     queue->size = 0;
 }
