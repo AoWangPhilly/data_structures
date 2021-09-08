@@ -17,18 +17,20 @@ main(int argc, char **argv)
     char *buf;
     Stack *stack;
 
-    if (argc != 2) {
-        perror("Usage: ./reverse fname");
-        exit(1);
-    }
+    // if (argc != 2) {
+    //     perror("Usage: ./reverse fname");
+    //     exit(1);
+    // }
 
-    readFile(argv[1], &buf);
+    readFile("reverse.c", &buf);
     stack = split(buf);
     
     while (!isEmpty(stack)) {
         printf("%s\n", pop(stack));
     }
 
+    free(buf);
+    buf = NULL;
     free(stack);
     stack = NULL;
 }
