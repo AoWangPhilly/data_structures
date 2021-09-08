@@ -1,2 +1,2 @@
 run:
-	gcc -o queue queue.c main.c
+	gcc -Wall -o queue queue.c main.c

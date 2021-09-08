@@ -1,69 +1,109 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "queue.h"
 
-
 enum {
-    CAPACITY = 16
+    CAPACITY = 8
 };
 
-Queue*
+Queue *
 create()
 {
-    Queue *queue;
+    Queue *q;
 
-    queue = malloc(sizeof(Queue));
-
-    queue->tail = queue->head = -1;
-    queue->capacity = CAPACITY;
-    queue->size = 0;
-    queue->array = malloc(sizeof(int) * queue->capacity);
-
-    return queue;
+    q = malloc(sizeof(Queue));
+    q->head = q->size = 0;
+    q->tail = -1;
+    q->capacity = CAPACITY;
+    q->array = malloc(CAPACITY * sizeof(int));
+    return q;
 }
 
 void
-enqueue(Queue *queue, int value)
+enqueue(Queue * queue, int value)
 {
-    int tail;
-    if (queue->head == -1) {
-        queue->array[++queue->head] = value;
-        ++queue->tail;
-    } else {
-        tail = (queue->tail + 1) % queue->capacity
-        if (tail != queue->head) {
-            queue->array[tail] = value;
-        } else {
-            
-        }
-        
+    if (isFull(queue)) {
+        perror("Queue is full");
+        exit(1);
     }
+    queue->tail = (queue->tail + 1) % queue->capacity;
+    queue->array[queue->tail] = value;
+    ++queue->size;
 }
 
 int
 dequeue(Queue *queue)
-{
+{   
+    int front;
+    if (isEmpty(queue)) {
+        perror("Queue is empty");
+        exit(1);
+    }
 
+    front = queue->array[queue->head];
+    --queue->size;
+    if (queue->size == 0) {
+        queue->head = 0;
+        queue->tail = -1;
+    } else {
+        queue->head = (queue->head + 1) % queue->capacity;
+    }
+    
+    return front;
+}
+
+
+int
+getSize(Queue *queue)
+{
+    return queue->size;
 }
 
 int
 isEmpty(Queue *queue)
 {
-    return queue->size == 0;
+    return getSize(queue) == 0;
 }
 
+int
+isFull(Queue *queue)
+{
+    return getSize(queue) == queue->capacity;
+}
+
+int
+front(Queue *queue)
+{
+    if (isEmpty(queue)) {
+        perror("Queue is empty");
+        exit(1);
+    }
+    return queue->array[queue->head];
+}
 
 void
 print(Queue *queue)
 {
-    Queue *tmp;
-
-    tmp = queue;
-
+    int head = queue->head;
     printf("<");
-    while(!isEmpty(queue)) {
-        printf("%d, ", dequeue(queue));
+    if (!isEmpty(queue)) {
+        while (head != queue->tail) {
+            // printf("head: %d\n", head);
+            printf("%d, ", queue->array[head]);
+            head = (head + 1) % queue->capacity;
+        }
+        printf("%d", queue->array[head]);
     }
-
     printf(">\n");
 }
+
+void
+freeQueue(Queue *queue)
+{
+    free(queue->array);
+    queue->array = NULL;
+
+    free(queue);
+    queue = NULL;
+}
+

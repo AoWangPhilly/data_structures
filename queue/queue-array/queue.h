@@ -22,6 +22,8 @@ int getSize(Queue *queue);
 
 int isEmpty(Queue *queue);
 
+int isFull(Queue *queue);
+
 int front(Queue *queue);
 
 void print(Queue *queue);
