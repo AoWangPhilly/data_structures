@@ -23,8 +23,7 @@ void
 enqueue(Queue * queue, int value)
 {
     if (isFull(queue)) {
-        perror("Queue is full");
-        exit(1);
+        resize(queue);
     }
     queue->tail = (queue->tail + 1) % queue->capacity;
     queue->array[queue->tail] = value;
@@ -95,6 +94,28 @@ print(Queue *queue)
         printf("%d", queue->array[head]);
     }
     printf(">\n");
+}
+
+void
+resize(Queue *queue)
+{
+    int *tmp;
+    int i;
+
+    tmp = malloc(queue->capacity * 2 * sizeof(int));
+
+    for (i = 0; !isEmpty(queue); ++i) {
+        tmp[i] = dequeue(queue);
+    }
+
+    
+    printf("\n");
+    free(queue->array);
+    queue->capacity *= 2;
+    queue->array = tmp;
+    queue->head = 0;
+    queue->tail = i - 1;
+    queue->size = i;
 }
 
 void

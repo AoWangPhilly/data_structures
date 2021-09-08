@@ -28,6 +28,8 @@ int front(Queue *queue);
 
 void print(Queue *queue);
 
+void resize(Queue *queue);
+
 void freeQueue(Queue *queue);
 
 #endif //DATA_STRUCTURES_QUEUE_H
