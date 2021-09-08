@@ -21,5 +21,4 @@ char *pop(Stack *);
 
 int isEmpty(Stack *);
 
-void freeStack(Stack *);
 #endif //STACK_H

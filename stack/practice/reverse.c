@@ -17,12 +17,12 @@ main(int argc, char **argv)
     char *buf;
     Stack *stack;
 
-    // if (argc != 2) {
-    //     perror("Usage: ./reverse fname");
-    //     exit(1);
-    // }
+    if (argc != 2) {
+        perror("Usage: ./reverse fname");
+        exit(1);
+    }
 
-    readFile("reverse.c", &buf);
+    readFile(argv[1], &buf);
     stack = split(buf);
     
     while (!isEmpty(stack)) {
@@ -30,8 +30,8 @@ main(int argc, char **argv)
     }
 
     free(buf);
+    free(stack); 
     buf = NULL;
-    free(stack);
     stack = NULL;
 }
 
@@ -64,13 +64,11 @@ split(char *buf)
 {
     Stack *stack;
     char *token;
-
+    
     stack = create();
 
-    token = strtok(buf, "\n");
-    while (token) {
+    while ((token = strsep(&buf, "\n")) != NULL) {
         push(stack, token);
-        token = strtok(NULL, "\n");
     }
 
     return stack;

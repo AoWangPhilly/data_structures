@@ -9,6 +9,7 @@ create()
 
     s = malloc(sizeof(Stack));
     s->size = 0;
+    s->top = NULL;
     return s;
 }
 
