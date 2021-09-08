@@ -102,14 +102,12 @@ resize(Queue *queue)
     int *tmp;
     int i;
 
-    tmp = malloc(queue->capacity * 2 * sizeof(int));
+    tmp = malloc(2 * queue->capacity * sizeof(int));
 
     for (i = 0; !isEmpty(queue); ++i) {
         tmp[i] = dequeue(queue);
     }
 
-    
-    printf("\n");
     free(queue->array);
     queue->capacity *= 2;
     queue->array = tmp;
