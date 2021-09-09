@@ -1,2 +1,2 @@
 # data_structures
-Data Structures in C
+Data Structures in Python and C
